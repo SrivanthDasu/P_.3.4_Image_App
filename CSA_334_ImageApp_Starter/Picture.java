@@ -372,26 +372,26 @@ public void setLow(Color c){
  */
 public void reveal(){
     Pixel leftPixel = null;
-    
+
     Pixel[][] pixels = this.getPixels2D();
-    
+
     Color leftColor = null;
-    
-    
+
+
     for (int row = 0; row < pixels.length;row++)
     {
       for (int col = 0; col < pixels[0].length-1; col++)
       {
-        leftPixel = pixels[row][col];   
-        
+        leftPixel = pixels[row][col];
+
         leftColor = leftPixel.getColor();
-      
+
         leftPixel.setColor(new Color(HIGH_FILTER * (leftColor.getRed() % LOW_FILTER),
                HIGH_FILTER * (leftColor.getGreen() % LOW_FILTER),
                HIGH_FILTER * (leftColor.getBlue() % LOW_FILTER)));
-        
+
     }
-    
+
   }
 }
 
@@ -518,10 +518,69 @@ public static Picture showDifferentArea (Picture pic, ArrayList<Point> myPoints)
 }
 
  
-  /* Main method for testing - each class in Java can have a main 
-   * method 
+  /** Method to rotate the picture 180 degrees */
+  public Picture rotate180()
+  {
+    Picture result = new Picture(this.getHeight(), this.getWidth());
+    Pixel[][] origPixels = this.getPixels2D();
+    Pixel[][] resultPixels = result.getPixels2D();
+
+    for (int row = 0; row < origPixels.length; row++)
+    {
+      for (int col = 0; col < origPixels[0].length; col++)
+      {
+        resultPixels[origPixels.length - 1 - row][origPixels[0].length - 1 - col].setColor(origPixels[row][col].getColor());
+      }
+    }
+    return result;
+  }
+
+  /** Method to rotate the picture 90 degrees clockwise */
+  public Picture rotate90Clockwise()
+  {
+     Pixel[][] orig = this.getPixels2D();
+     int h = orig.length;
+     int w = orig[0].length;
+
+      Picture result = new Picture(w, h); // swapped
+      Pixel[][] res = result.getPixels2D();
+
+     for (int r = 0; r < h; r++)
+      {
+         for (int c = 0; c < w; c++)
+         {
+             res[c][h - 1 - r].setColor(orig[r][c].getColor());
+          }
+      }
+       return result;
+  }
+
+
+  /** Method to rotate the picture 90 degrees counterclockwise */
+  public Picture rotate90CounterClockwise()
+  {
+      Pixel[][] orig = this.getPixels2D();
+      int h = orig.length;
+      int w = orig[0].length;
+
+      Picture result = new Picture(w, h); // swapped
+      Pixel[][] res = result.getPixels2D();
+
+    for (int r = 0; r < h; r++)
+      {
+          for (int c = 0; c < w; c++)
+          {
+             res[w - 1 - c][r].setColor(orig[r][c].getColor());
+          }
+      }
+      return result;
+  }
+
+
+  /* Main method for testing - each class in Java can have a main
+   * method
    */
-  public static void main(String[] args) 
+  public static void main(String[] args)
   {
     Picture beach = new Picture("beach.jpg");
     Picture beach2 = new Picture("beach.jpg");  //unaltered beach pic

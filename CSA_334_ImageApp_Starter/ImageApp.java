@@ -1,7 +1,6 @@
 /*
-  ImageApp: 
+  ImageApp:
  */
-import java.awt.Color;
 
 public class ImageApp
 {
@@ -36,27 +35,34 @@ public class ImageApp
     /* to be implemented */
 
     // Image #4 Using the original image and pixels, rotate it 180 degrees
-    Picture upsidedownImage = new Picture(pictureFile);
+    Picture upsidedownImage = origImg.rotate180();
     Pixel[][] upsideDownPixels = upsidedownImage.getPixels2D();
+    System.out.println("This window is 180 degrees rotated image");
+    upsidedownImage.explore();
 
-    /* to be implemented */
-
-    // Image #5 Using the original image and pixels, rotate image 90
-    Picture rotateImg = new Picture(pictureFile);
+    // Image #5 Using the original image and pixels, rotate image 90 counterclockwise (-90)
+    Picture rotateImg = origImg.rotate90CounterClockwise();
     Pixel[][] rotatePixels = rotateImg.getPixels2D();
+    System.out.println("This window is 90 degrees counterclockwise rotated image");
+    rotateImg.explore();
 
-    /* to be implemented */
-
-    // Image #6 Using the original image and pixels, rotate image -90
-    Picture rotateImg2 = new Picture(pictureFile);
+    // Image #6 Using the original image and pixels, rotate image 90 clockwise
+    Picture rotateImg2 = origImg.rotate90Clockwise();
     Pixel[][] rotatePixels2 = rotateImg2.getPixels2D();
-
-    /* to be implemented */
+    System.out.println("This window is 90 degrees clockwise rotated image");
+    rotateImg2.explore();
 
 
     // Final Image: Add a small image to a larger one
-
-    /* to be implemented */
+    Picture compositeImage = new Picture(pictureFile);
+    Picture balloon = new Picture("lib2/balloon.png");
+    Picture bird = new Picture("lib2/bird.png");
+    Picture cat = new Picture("lib2/cat.png");
+    compositeImage.copy(balloon, 10, 10);
+    compositeImage.copy(bird, 100, 100);
+    compositeImage.copy(cat, 200, 200);
+    System.out.println("This window has 3 small images pasted on a large image");
+    compositeImage.explore();
 
 
 
